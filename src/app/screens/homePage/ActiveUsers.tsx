@@ -7,8 +7,8 @@ import CardCover from "@mui/joy/CardCover";
 
 const activeUsers = [
   { memberNick: "Martin", memberImage: "/img/martin.webp" },
-  { memberNick: "Justin", memberImage: "/img/justin.webp" },
-  { memberNick: "Rose", memberImage: "/img/rose.webp" },
+  { memberNick: "Robin", memberImage: "/img/justin.webp" },
+  { memberNick: "Ross", memberImage: "/img/rose.webp" },
   { memberNick: "Nusret", memberImage: "/img/nusret.webp" },
 ];
 
@@ -28,16 +28,16 @@ export default function ActiveUsers() {
                         <img src={ele.memberImage} alt="" />
                       </CardCover>
                       <CardCover className={"card-cover"} />
-                      <CardContent sx={{ justifyContent: "flex-end" }}>
+                      <CardContent />
+                      <CardOverflow className={"member-nickname"}>
                         <Typography
                           level="h2"
                           fontSize="lg"
-                          textColor="#fff"
-                          mb={1}
+                          textColor="#000000eb"
                         >
                           {ele.memberNick}
                         </Typography>
-                      </CardContent>
+                      </CardOverflow>
                     </Card>
                   </CssVarsProvider>
                 );
