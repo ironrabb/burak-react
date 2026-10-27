@@ -2,7 +2,7 @@ import { Box, Container, Stack, Button } from "@mui/material";
 import { NavLink } from "react-router-dom";
 import Basket from "./Basket";
 export default function HomeNavbar() {
-  const authMember = null; // TODO: Replace with actual authentication logic
+  const authMember = true; // TODO: Replace with actual authentication logic
   return (
     <div className="home-navbar">
       <Container className="navbar-container">
