@@ -19,6 +19,7 @@ import "../css/app.css";
 import "../css/navbar.css";
 import "../css/footer.css";
 import "../css/home.css";
+import Test from "./screens/Test";
 function App() {
   const location = useLocation();
   console.log("location:", location);
@@ -40,6 +41,7 @@ function App() {
           <HelpPage />
         </Route>
         <Route path="/">
+          {/* <Test /> */}
           <HomePage />
         </Route>
       </Switch>

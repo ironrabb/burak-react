@@ -10,6 +10,7 @@ const activeUsers = [
   { memberNick: "Robin", memberImage: "/img/justin.webp" },
   { memberNick: "Ross", memberImage: "/img/rose.webp" },
   { memberNick: "Nusret", memberImage: "/img/nusret.webp" },
+  { memberNick: "Micheal", memberImage: "/img/me.webp" },
 ];
 
 export default function ActiveUsers() {
