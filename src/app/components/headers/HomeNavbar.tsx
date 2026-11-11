@@ -1,12 +1,24 @@
 import { Box, Container, Stack, Button } from "@mui/material";
 import { NavLink } from "react-router-dom";
 import Basket from "./Basket";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 export default function HomeNavbar() {
   const authMember = false; // TODO: Replace with actual authentication logic
-  const [count, setCount] = useState(0); // TODO: Replace with actual authentication logic
-  const buttonHandler = () => {
+  const [count, setCount] = useState<number>(0);
+  const [value, setValue] = useState<boolean>(true);
+
+  useEffect(() => {
+    console.log("componentDidMount"); // DATA FETCH
     setCount(count + 1);
+
+    return () => {
+      console.log("componentWillUnmount");
+    };
+  }, [value]);
+  /** HANDLERS **/ // TODO: Replace with actual authentication logic
+  const buttonHandler = () => {
+    // setCount(count + 1);
+    setValue(!value);
   };
   return (
     <div className="home-navbar">
