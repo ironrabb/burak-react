@@ -5,28 +5,39 @@ import CardOverflow from "@mui/joy/CardOverflow";
 import AspectRatio from "@mui/joy/AspectRatio";
 import CardCover from "@mui/joy/CardCover";
 
-const activeUsers = [
-  { memberNick: "Martin", memberImage: "/img/martin.webp" },
-  { memberNick: "Robin", memberImage: "/img/justin.webp" },
-  { memberNick: "Ross", memberImage: "/img/rose.webp" },
-  { memberNick: "Nusret", memberImage: "/img/nusret.webp" },
-  { memberNick: "Micheal", memberImage: "/img/me.webp" },
-];
+// const activeUsers = [
+//   { memberNick: "Martin", memberImage: "/img/martin.webp" },
+//   { memberNick: "Robin", memberImage: "/img/justin.webp" },
+//   { memberNick: "Ross", memberImage: "/img/rose.webp" },
+//   { memberNick: "Nusret", memberImage: "/img/nusret.webp" },
+//   { memberNick: "Micheal", memberImage: "/img/me.webp" },
+// ];
+import { useSelector } from "react-redux";
+import { createSelector } from "reselect";
+import { retrieveTopUsers } from "./selector";
+import { serverApi } from "../../../lib/config";
+import { Member } from "../../../lib/types/member";
 
+/** REDUX SLICE & SELECTOR **/
+const topUsersRetriever = createSelector(retrieveTopUsers, (topUsers) => ({
+  topUsers,
+}));
 export default function ActiveUsers() {
+  const { topUsers } = useSelector(topUsersRetriever);
   return (
     <div className="active-users-frame">
       <Container>
         <Stack className="main">
           <Box className="category-title">Active Users</Box>
           <Stack className="cards-frame">
-            {activeUsers.length !== 0 ? (
-              activeUsers.map((ele, index) => {
+            {topUsers.length !== 0 ? (
+              topUsers.map((member: Member) => {
+                const imagePath = `${serverApi}/${member.memberImage}`;
                 return (
-                  <CssVarsProvider key={index}>
+                  <CssVarsProvider key={member._id}>
                     <Card className={"card"}>
                       <CardCover>
-                        <img src={ele.memberImage} alt="" />
+                        <img src={imagePath} alt="bu yerda member rasmi" />
                       </CardCover>
                       <CardCover className={"card-cover"} />
                       <CardContent />
@@ -36,7 +47,7 @@ export default function ActiveUsers() {
                           fontSize="lg"
                           textColor="#000000eb"
                         >
-                          {ele.memberNick}
+                          {member.memberNick}
                         </Typography>
                       </CardOverflow>
                     </Card>

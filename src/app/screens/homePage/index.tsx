@@ -9,27 +9,33 @@ import Events from "./Events";
 import { useDispatch, useSelector } from "react-redux";
 import { Dispatch } from "@reduxjs/toolkit";
 import { createSelector } from "reselect";
-import { setNewDishes, setPopularDishes } from "./slice";
-import { retrievePopularDishes } from "./selector";
+import { setNewDishes, setPopularDishes, setTopUsers } from "./slice";
+import { retrievePopularDishes, retrieveTopUsers } from "./selector";
 import { Product } from "../../../lib/types/product";
+import { Member } from "../../../lib/types/member";
 import ProductService from "../../services/ProductService";
 import { ProductCollection } from "../../../lib/enums/product.enum";
+import MemberService from "../../services/MemberService";
 import "../../../css/home.css";
 /** REDUX SLICE & SELECTOR **/
 const actionDispatch = (dispatch: Dispatch) => ({
   setPopularDishes: (data: Product[]) => dispatch(setPopularDishes(data)),
   setNewDishes: (data: Product[]) => dispatch(setNewDishes(data)),
+  setTopUsers: (data: Member[]) => dispatch(setTopUsers(data)),
 });
-
 const popularDishesRetriever = createSelector(
   retrievePopularDishes,
   (popularDishes) => ({ popularDishes }),
 );
+const topUsersRetriever = createSelector(retrieveTopUsers, (topUsers) => ({
+  topUsers,
+}));
 
 export default function HomePage() {
-  const { setPopularDishes, setNewDishes } = actionDispatch(useDispatch());
+  const { setPopularDishes, setNewDishes, setTopUsers } =
+    actionDispatch(useDispatch());
   const { popularDishes } = useSelector(popularDishesRetriever);
-
+  const { topUsers } = useSelector(topUsersRetriever);
   useEffect(() => {
     // Backend server data fetch => Data
     const product = new ProductService();
@@ -53,6 +59,11 @@ export default function HomePage() {
         productCollection: ProductCollection.DISH,
       })
       .then((data) => setNewDishes(data))
+      .catch((err) => console.log(err));
+    const member = new MemberService();
+    member
+      .getTopUsers()
+      .then((data) => setTopUsers(data))
       .catch((err) => console.log(err));
   }, []);
   return (
