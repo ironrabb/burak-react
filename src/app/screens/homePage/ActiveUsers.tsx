@@ -5,13 +5,6 @@ import CardOverflow from "@mui/joy/CardOverflow";
 import AspectRatio from "@mui/joy/AspectRatio";
 import CardCover from "@mui/joy/CardCover";
 
-// const activeUsers = [
-//   { memberNick: "Martin", memberImage: "/img/martin.webp" },
-//   { memberNick: "Robin", memberImage: "/img/justin.webp" },
-//   { memberNick: "Ross", memberImage: "/img/rose.webp" },
-//   { memberNick: "Nusret", memberImage: "/img/nusret.webp" },
-//   { memberNick: "Micheal", memberImage: "/img/me.webp" },
-// ];
 import { useSelector } from "react-redux";
 import { createSelector } from "reselect";
 import { retrieveTopUsers } from "./selector";

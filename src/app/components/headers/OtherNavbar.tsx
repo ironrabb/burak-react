@@ -1,7 +1,12 @@
 import { Box, Container, Stack, Button } from "@mui/material";
 import { NavLink } from "react-router-dom";
 import Basket from "./Basket";
-export default function OtherNavbar() {
+import { CartItem } from "../../../lib/types/search";
+interface OtherNavbarProps {
+  cartItems: CartItem[];
+}
+export default function OtherNavbar(props: OtherNavbarProps) {
+  const { cartItems } = props;
   const authMember = null; // TODO: Replace with actual authentication logic
   return (
     <div className="other-navbar">
@@ -41,7 +46,7 @@ export default function OtherNavbar() {
                 Help
               </NavLink>
             </Box>
-            <Basket />
+            <Basket cartItems={cartItems} />
             {!authMember ? (
               <Box>
                 <Button variant="contained" className="login-button">

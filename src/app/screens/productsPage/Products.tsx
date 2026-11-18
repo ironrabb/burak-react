@@ -19,6 +19,7 @@ import { serverApi } from "../../../lib/config";
 import { ProductInquiry } from "../../../lib/types/product";
 import SearchIcon from "@mui/icons-material/Search";
 import { useHistory } from "react-router-dom";
+import { CartItem } from "../../../lib/types/search";
 const brands = [
   { name: "Gurme", imagePath: "/img/gurme.webp" },
   { name: "Sweets", imagePath: "/img/sweets.webp" },
@@ -33,8 +34,12 @@ const actionDispatch = (dispatch: Dispatch) => ({
 const productsRetriever = createSelector(retrieveProducts, (products) => ({
   products,
 }));
+interface ProductsProps {
+  onAdd: (item: CartItem) => void;
+}
 
-export default function Products() {
+export default function Products(props: ProductsProps) {
+  const { onAdd } = props;
   const [order, setOrder] = useState("New");
   const [category, setCategory] = useState("Dish");
   const { setProducts } = actionDispatch(useDispatch());
@@ -43,7 +48,7 @@ export default function Products() {
   const history = useHistory();
   const [productSearch, setProductSearch] = useState<ProductInquiry>({
     page: 1,
-    limit: 2,
+    limit: 8,
     order: "createdAt",
     productCollection: ProductCollection.DISH,
     search: "",
@@ -255,6 +260,17 @@ export default function Products() {
                               src="/icons/shopping-cart.svg"
                               alt=""
                               style={{ display: "flex" }}
+                              onClick={(e) => {
+                                console.log("BUTTON PRESSED!");
+                                onAdd({
+                                  _id: product._id,
+                                  quantity: 1,
+                                  name: product.productName,
+                                  price: product.productPrice,
+                                  image: product.productImages[0],
+                                });
+                                e.stopPropagation();
+                              }}
                             />
                           </Button>
                           <Button className="view-btn">
