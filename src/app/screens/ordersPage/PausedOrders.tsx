@@ -6,11 +6,7 @@ import { useSelector } from "react-redux";
 import { createSelector } from "reselect";
 import { retrievePausedOrders } from "./selector";
 import { Messages, serverApi } from "../../../lib/config";
-import {
-  Order,
-  OrderItem,
-  OrderUpdateInput,
-} from "../../../lib/types/order";
+import { Order, OrderItem, OrderUpdateInput } from "../../../lib/types/order";
 import { Product } from "../../../lib/types/product";
 import { T } from "../../../lib/types/common";
 import { OrderStatus } from "../../../lib/enums/order.enum";
